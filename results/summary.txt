@@ -1,0 +1,72 @@
+========================================================================
+  Pickle Scanner–Loader Mismatch Evaluation — Results Summary
+========================================================================
+
+── Run Stamp ───────────────────────────────────────────────────────────
+Timestamp     : 2026-10-24T22:59:49Z
+Seed          : 42
+Corpus sha256 : f8842089301cee39de8ff9310701e5137c8f1a2e6f35f03fd81a87c43b45a3b0
+Total files   : 7500
+  n_malicious : 5000
+  n_benign    : 2500
+picklescan    : 0.0.22
+modelscan     : 0.8.4
+python        : 3.11.17
+
+── Payload Callables (Methodology Section) ─────────────────────────────
+  Exact GLOBAL opcode callables baked into each pickle variant:
+  reduce_basic          : builtins.exec
+  nullifai_7z           : builtins.exec
+  loadpath_trick        : builtins.eval
+  benign                : N/A
+  safetensors_control   : N/A
+
+── Mechanism Elimination Results ──────────────────────────────────────
+  Tests whether alternative loaders PREVENT payload execution.
+  Denominator = all malicious files (is_malicious=True).
+  Loader                                Exec / Total  Notes
+  ------------------------------------ -----   -----  ------------------------------
+  Standard pickle.load()                5000 /  5000
+  torch.load(weights_only=True)            0 /  5000  ← should be 0
+  safetensors.numpy.load_file()            0 /  5000  ← should be 0
+
+── Scanner–Loader Mismatch Headline ───────────────────────────────────
+  (executed payloads the scanner FAILED to flag — pickle.load baseline)
+  picklescan    : 1250 executed payload(s) NOT flagged  (out of 5000 that executed)
+  modelscan     :   0 executed payload(s) NOT flagged  (out of 5000 that executed)
+
+── Overall Per-Scanner Metrics ────────────────────────────────────────
+  Det Rate  : fraction of EXECUTED malicious files flagged
+  FP Rate   : fraction of BENIGN files flagged
+  Wilson CI : 95% score interval (stdlib math, no scipy)
+
+| Scanner    | Det Rate   | Wilson 95% CI   | FP Rate   |   Exec-Not-Flagged | TP/N_exec   |
+|------------|------------|-----------------|-----------|--------------------|-------------|
+| picklescan | 75.0%      | [73.8%, 76.2%]  | 0.0%      |               1250 | 3750/5000   |
+| modelscan  | 100.0%     | [99.9%, 100.0%] | 0.0%      |                  0 | 5000/5000   |
+
+── Per-Variant Breakdown ───────────────────────────────────────────────
+  MAL rows: detection metrics over executed malicious files
+  BEN rows: false-positive metrics over benign files
+
+| Scanner    | Variant             | Type   | N Exec   | Exec-Not-Flag   | Det Rate   | FP Count   | FP Rate   |
+|------------|---------------------|--------|----------|-----------------|------------|------------|-----------|
+| picklescan | reduce_basic        | MAL    | 2500     | 0               | 100.0%     | -          | -         |
+| picklescan | nullifai_7z         | MAL    | 1250     | 1250            | 0.0%       | -          | -         |
+| picklescan | loadpath_trick      | MAL    | 1250     | 0               | 100.0%     | -          | -         |
+| picklescan | benign              | BEN    | -        | -               | -          | 0          | 0.0%      |
+| picklescan | safetensors_control | BEN    | -        | -               | -          | 0          | 0.0%      |
+| modelscan  | reduce_basic        | MAL    | 2500     | 0               | 100.0%     | -          | -         |
+| modelscan  | nullifai_7z         | MAL    | 1250     | 0               | 100.0%     | -          | -         |
+| modelscan  | loadpath_trick      | MAL    | 1250     | 0               | 100.0%     | -          | -         |
+| modelscan  | benign              | BEN    | -        | -               | -          | 0          | 0.0%      |
+| modelscan  | safetensors_control | BEN    | -        | -               | -          | 0          | 0.0%      |
+
+── Variant Key ────────────────────────────────────────────────────────
+  reduce_basic        : classic __reduce__ → exec()  [callable: builtins.exec]
+  nullifai_7z         : polyglot (pickle-front + 7z + tail)  [callable: builtins.exec]
+  loadpath_trick      : indirect eval+base64  [GLOBAL=eval; exec hidden in b64]
+  benign              : legitimate pickle (no callables, no GLOBAL opcodes)
+  safetensors_control : non-pickle negative control (.safetensors format)
+
+========================================================================

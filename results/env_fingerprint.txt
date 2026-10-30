@@ -1,0 +1,21 @@
+============================================================
+  Harness Environment Fingerprint
+============================================================
+  Python            : 3.11.17  (/usr/local/bin/python)
+  picklescan        : 0.0.22
+  modelscan         : 0.8.4
+  safetensors       : 0.4.3
+  numpy             : 1.26.4
+  py7zr             : 0.22.0
+  pandas            : 2.2.3
+  torch             : 2.14.1+cpu  (CPU-only build)
+
+  Polyglot offset k : 88 bytes  (len of malicious pickle prefix)
+  Marker used       : /tmp/pwned_mal_nullifai_0001
+  Pickle prefix hex : 8004954d000000000000008c086275696c74696e73948c04657865639493948c316f70656e28272f746d702f70776e65645f6d616c5f6e756c6c696661695f30303031272c20277727292e636c6f7365282994859452942e
+  7z magic bytes    : 377abcaf271c  (found at byte 88 of polyglot file)
+
+  Note: k varies slightly per file because marker lengths differ.
+  For nullifai_{i:04d}: k = len(pickle.dumps(_ReduceBasicPayload(marker), protocol=4))
+  Typical range: 74 – 80 bytes (depending on marker string length).
+============================================================

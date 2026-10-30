@@ -1,0 +1,74 @@
+Picklescan stdout/stderr on nullifai_7z files
+Answers paper §IV-B: 'exact exception / point at which parsing fails'
+Tool: picklescan v0.0.22  |  Corpus seed: 42
+============================================================
+
+────────────────────────────────────────────────────────────
+File   : mal_nullifai_0001
+Path   : corpus/malicious/mal_nullifai_0001.pkl
+Result : error
+STDOUT :
+ERROR: parsing pickle in /harness/corpus/malicious/mal_nullifai_0001.pkl: at position 88, opcode b'7' unknown
+/harness/corpus/malicious/mal_nullifai_0001.pkl: dangerous import 'builtins exec' FOUND
+----------- SCAN SUMMARY -----------
+Scanned files: 1
+Infected files: 1
+Dangerous globals: 1
+STDERR :
+(empty)
+
+────────────────────────────────────────────────────────────
+File   : mal_nullifai_0002
+Path   : corpus/malicious/mal_nullifai_0002.pkl
+Result : error
+STDOUT :
+ERROR: parsing pickle in /harness/corpus/malicious/mal_nullifai_0002.pkl: at position 88, opcode b'7' unknown
+/harness/corpus/malicious/mal_nullifai_0002.pkl: dangerous import 'builtins exec' FOUND
+----------- SCAN SUMMARY -----------
+Scanned files: 1
+Infected files: 1
+Dangerous globals: 1
+STDERR :
+(empty)
+
+────────────────────────────────────────────────────────────
+File   : mal_nullifai_0003
+Path   : corpus/malicious/mal_nullifai_0003.pkl
+Result : error
+STDOUT :
+ERROR: parsing pickle in /harness/corpus/malicious/mal_nullifai_0003.pkl: at position 88, opcode b'7' unknown
+/harness/corpus/malicious/mal_nullifai_0003.pkl: dangerous import 'builtins exec' FOUND
+----------- SCAN SUMMARY -----------
+Scanned files: 1
+Infected files: 1
+Dangerous globals: 1
+STDERR :
+(empty)
+
+────────────────────────────────────────────────────────────
+File   : mal_nullifai_0004
+Path   : corpus/malicious/mal_nullifai_0004.pkl
+Result : error
+STDOUT :
+ERROR: parsing pickle in /harness/corpus/malicious/mal_nullifai_0004.pkl: at position 88, opcode b'7' unknown
+/harness/corpus/malicious/mal_nullifai_0004.pkl: dangerous import 'builtins exec' FOUND
+----------- SCAN SUMMARY -----------
+Scanned files: 1
+Infected files: 1
+Dangerous globals: 1
+STDERR :
+(empty)
+
+────────────────────────────────────────────────────────────
+File   : mal_nullifai_0005
+Path   : corpus/malicious/mal_nullifai_0005.pkl
+Result : error
+STDOUT :
+ERROR: parsing pickle in /harness/corpus/malicious/mal_nullifai_0005.pkl: at position 88, opcode b'7' unknown
+/harness/corpus/malicious/mal_nullifai_0005.pkl: dangerous import 'builtins exec' FOUND
+----------- SCAN SUMMARY -----------
+Scanned files: 1
+Infected files: 1
+Dangerous globals: 1
+STDERR :
+(empty)

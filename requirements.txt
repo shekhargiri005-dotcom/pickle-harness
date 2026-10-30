@@ -1,0 +1,32 @@
+# ──────────────────────────────────────────────────────────────────────────────
+# Pickle Scanner–Loader Mismatch Evaluation Harness
+# requirements.txt — PINNED.  Do NOT add unlisted packages (see STACK section).
+# ──────────────────────────────────────────────────────────────────────────────
+
+# ── Scanners under test ───────────────────────────────────────────────────────
+picklescan==0.0.22
+modelscan==0.8.4
+
+# ── Archive support (nullifai_7z variant only) ────────────────────────────────
+py7zr==0.22.0
+
+# ── Data / display (join stage only) ─────────────────────────────────────────
+pandas==2.2.3
+tabulate==0.9.0
+
+# ── safetensors writer (negative control) ────────────────────────────────────
+safetensors==0.4.3
+
+# ── numpy — implicit dep of safetensors.numpy (not in STACK list, but required)
+# ASSUMPTION: adding numpy as the minimal transitive dep of safetensors[numpy].
+# Torch would be an alternative but is hundreds of MB; numpy is correct here.
+numpy==1.26.4
+
+# ── Everything else is stdlib (pickle, pickletools, json, csv, math, subprocess)
+
+# ── PyTorch (mechanism elimination testing) ───────────────────────────────────
+# torch is installed via Dockerfile (not here) to use the CPU-only index URL:
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
+# This avoids the 2 GB CUDA build. Required by observe_load.py for:
+#   torch.load(file, weights_only=True)  — RestrictedUnpickler defense test
+
