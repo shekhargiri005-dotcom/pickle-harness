@@ -5,3 +5,12 @@ corpus/
 .vscode/
 .idea/
 
+# LaTeX
+*.tex
+*.pdf
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.synctex.gz
